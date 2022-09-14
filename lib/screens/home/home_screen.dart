@@ -8,6 +8,8 @@ import 'package:bool_objects/screens/home/components/object_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+const double _cardBottomMargin = 24.0;
+
 class HomePageVm extends DisposableVM {
   late final HomePageBloc bloc;
 
@@ -46,7 +48,7 @@ class _MyHomePageState extends State<HomePage> with ErrorSnackBar {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Test'),
+        title: const Text('List'),
       ),
       body: BlocConsumer<HomePageBloc, HomePageState>(
         bloc: _vm.bloc,
@@ -100,30 +102,25 @@ class _HomePageBody extends StatelessWidget {
       },
       child: ListView(
         physics: const BouncingScrollPhysics(),
-        children: [
-          const SizedBox(height: 10),
-          ...data.objects
-              .map(
-                (object) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: ObjectCard(
-                    object: object,
-                    state: data,
-                    onSwitchValue:
-                        (MyObjectDto objectDto, SwitchDto switchDto) {
-                      vm.bloc.add(
-                        SetSwitchValueEvent(
-                          objectDto: objectDto,
-                          switchDto: switchDto,
-                        ),
-                      );
-                    },
-                  ),
+        children: data.objects
+            .map(
+              (object) => Padding(
+                padding: const EdgeInsets.only(bottom: _cardBottomMargin),
+                child: ObjectCard(
+                  object: object,
+                  state: data,
+                  onSwitchValue: (MyObjectDto objectDto, SwitchDto switchDto) {
+                    vm.bloc.add(
+                      SetSwitchValueEvent(
+                        objectDto: objectDto,
+                        switchDto: switchDto,
+                      ),
+                    );
+                  },
                 ),
-              )
-              .toList(),
-          const SizedBox(height: 10),
-        ],
+              ),
+            )
+            .toList(),
       ),
     );
   }

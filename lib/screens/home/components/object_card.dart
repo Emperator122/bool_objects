@@ -3,7 +3,8 @@ import 'package:bool_objects/screens/home/bloc/state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' as cupertino;
 
-const double cardPadding = 15.0;
+const double _cardVerticalPadding = 16.0;
+const double _cardHorizontalPadding = 24.0;
 
 class ObjectCard extends StatelessWidget {
   final MyObjectDto object;
@@ -29,25 +30,31 @@ class ObjectCard extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
-              vertical: cardPadding,
-              horizontal: cardPadding,
+              vertical: _cardVerticalPadding,
+              horizontal: _cardHorizontalPadding - 15,
             ),
             child: Column(
               children: [
                 Row(
                   children: [
                     const SizedBox(width: 15),
-                    const Text('Switch'),
+                    const Text('Switch name'),
                     Transform.scale(
                       scale: 0.6,
                       child: cupertino.CupertinoSwitch(
+                        activeColor: Theme.of(context)
+                            .switchTheme
+                            .trackColor
+                            ?.resolve({MaterialState.pressed}),
                         value: object.switch1.value,
                         onChanged: (value) {
-                          if(state.loading) {
+                          if (state.loading) {
                             return;
                           }
-                          final switchDto = object.switch1.copyWith(value: value);
-                          onSwitchValue(object.copyWith(switch1: switchDto), switchDto);
+                          final switchDto =
+                              object.switch1.copyWith(value: value);
+                          onSwitchValue(
+                              object.copyWith(switch1: switchDto), switchDto);
                         },
                       ),
                     ),
@@ -59,27 +66,31 @@ class ObjectCard extends StatelessWidget {
                       value: true,
                       groupValue: object.switch2.value,
                       onChanged: (bool? value) {
-                        if(state.loading) {
+                        if (state.loading) {
                           return;
                         }
-                        final switchDto = object.switch2.copyWith(value: (value ?? true));
-                        onSwitchValue(object.copyWith(switch2: switchDto), switchDto);
+                        final switchDto =
+                            object.switch2.copyWith(value: (value ?? true));
+                        onSwitchValue(
+                            object.copyWith(switch2: switchDto), switchDto);
                       },
                     ),
-                    const Text('Radio1'),
+                    const Text('Radio 1'),
                     const SizedBox(width: 15),
                     Radio<bool>(
                       value: false,
                       groupValue: object.switch2.value,
                       onChanged: (bool? value) {
-                        if(state.loading) {
+                        if (state.loading) {
                           return;
                         }
-                        final switchDto = object.switch2.copyWith(value: (value ?? true));
-                        onSwitchValue(object.copyWith(switch2: switchDto), switchDto);
+                        final switchDto =
+                            object.switch2.copyWith(value: (value ?? true));
+                        onSwitchValue(
+                            object.copyWith(switch2: switchDto), switchDto);
                       },
                     ),
-                    const Text('Radio2'),
+                    const Text('Radio 2'),
                   ],
                 ),
                 Row(
@@ -87,11 +98,13 @@ class ObjectCard extends StatelessWidget {
                     Checkbox(
                       value: object.switch3.value,
                       onChanged: (bool? value) {
-                        if(state.loading) {
+                        if (state.loading) {
                           return;
                         }
-                        final switchDto = object.switch3.copyWith(value: (value ?? !object.switch3.value));
-                        onSwitchValue(object.copyWith(switch3: switchDto), switchDto);
+                        final switchDto = object.switch3
+                            .copyWith(value: (value ?? !object.switch3.value));
+                        onSwitchValue(
+                            object.copyWith(switch3: switchDto), switchDto);
                       },
                     ),
                     const Text('Checkbox'),
@@ -120,8 +133,8 @@ class _CardHeader extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(
-        vertical: cardPadding,
-        horizontal: cardPadding,
+        vertical: _cardVerticalPadding,
+        horizontal: _cardHorizontalPadding,
       ),
       decoration: const BoxDecoration(color: Color(0XFFEAF2FC)),
       child: Row(
@@ -129,14 +142,18 @@ class _CardHeader extends StatelessWidget {
           Expanded(
             child: Text(
               name,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
             ),
           ),
           Text(
             'ID:$id',
             style: TextStyle(
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
               color: Theme.of(context).hintColor,
+              fontSize: 16,
             ),
           ),
         ],
