@@ -11,11 +11,21 @@ class SetDataEvent extends HomePageEvent {
   SetDataEvent({required this.objects});
 }
 
-class SetSwitchesValueEvent extends HomePageEvent {
+class SetSwitchValueEvent extends HomePageEvent {
   final MyObjectDto objectDto;
   final SwitchDto switchDto;
 
-  SetSwitchesValueEvent({
+  SetSwitchValueEvent({
+    required this.objectDto,
+    required this.switchDto,
+  });
+}
+
+class SendSwitchValueToDBEvent extends HomePageEvent {
+  final MyObjectDto objectDto;
+  final SwitchDto switchDto;
+
+  SendSwitchValueToDBEvent({
     required this.objectDto,
     required this.switchDto,
   });

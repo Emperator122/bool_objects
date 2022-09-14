@@ -1,12 +1,21 @@
 import 'dart:async';
-import 'package:bool_objects/adapters/objects_extension.dart';
 import 'package:bool_objects/entities/my_object_dto.dart';
-import 'package:bool_objects/network/models/my_object.dart';
 import 'package:bool_objects/repositories/objects_repository.dart';
 import 'package:bool_objects/screens/home/bloc/event.dart';
 import 'package:bool_objects/screens/home/bloc/state.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rxdart/rxdart.dart';
+
+const _serverGetDebounceDuration = Duration(milliseconds: 5000);
+const _serverSendDebounceDuration = Duration(milliseconds: 2000);
+
+EventTransformer<SendSwitchValueToDBEvent> debounce(Duration duration) {
+  return (events, mapper) => events
+      .groupBy((event) => '${event.switchDto.type}${event.objectDto.id}')
+      .flatMap((groupedStream) => groupedStream.debounceTime(duration))
+      .switchMap(mapper);
+}
 
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   late final ObjectsRepository objectsRepository;
@@ -17,12 +26,19 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
 
     on<LoadDataEvent>(_onLoadData);
     on<SetDataEvent>(_onSetData);
-    on<SetSwitchesValueEvent>(_onSetSwitchValue);
+    on<SetSwitchValueEvent>(_onSetSwitchValue);
+    on<SendSwitchValueToDBEvent>(
+      _onSendSwitchValueToDB,
+      transformer: debounce(
+        _serverSendDebounceDuration,
+      ),
+    );
 
     add(LoadDataEvent());
 
-    objectsStreamSubscription =
-        objectsRepository.listenableObjectsDtoStream.listen(_onUpdateData);
+    objectsStreamSubscription = objectsRepository.listenableObjectsDtoStream
+        .debounceTime(_serverGetDebounceDuration)
+        .listen(_onUpdateData);
   }
 
   Future<void> _onLoadData(
@@ -52,18 +68,32 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   }
 
   Future<void> _onSetSwitchValue(
-    SetSwitchesValueEvent event,
+    SetSwitchValueEvent event,
     Emitter<HomePageState> emit,
   ) async {
-    emit(state.provideLoading());
+    // do optimistic update
     final newState = state.mapOrNull(
       data: (state) => state.copyWith(
-        objects: state.objects.replaceObject(event.objectDto),
+        objects: state.objects.replaceSwitch(
+          event.objectDto.id,
+          event.switchDto,
+        ),
       ),
     );
-    if(newState != null) {
+    if (newState != null) {
       emit(newState);
     }
+    // and add send event
+    add(SendSwitchValueToDBEvent(
+      objectDto: event.objectDto,
+      switchDto: event.switchDto,
+    ));
+  }
+
+  Future<void> _onSendSwitchValueToDB(
+    SendSwitchValueToDBEvent event,
+    Emitter<HomePageState> emit,
+  ) async {
     await objectsRepository.editObject(event.objectDto, event.switchDto);
   }
 
@@ -79,10 +109,20 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
 }
 
 extension on BuiltList<MyObjectDto> {
-  BuiltList<MyObjectDto> replaceObject(MyObjectDto objectDto) {
-    final index = indexWhere((object) => object.id == objectDto.id);
+  BuiltList<MyObjectDto> replaceSwitch(int objectId, SwitchDto switchDto) {
+    final index = indexWhere((object) => object.id == objectId);
     if (index != -1) {
-      return rebuild((list) => list[index] = objectDto);
+      switch (switchDto.type) {
+        case SwitchType.switch1:
+          return rebuild(
+              (list) => list[index] = list[index].copyWith(switch1: switchDto));
+        case SwitchType.switch2:
+          return rebuild(
+              (list) => list[index] = list[index].copyWith(switch2: switchDto));
+        case SwitchType.switch3:
+          return rebuild(
+              (list) => list[index] = list[index].copyWith(switch3: switchDto));
+      }
     }
     return this;
   }

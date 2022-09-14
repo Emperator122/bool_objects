@@ -112,7 +112,7 @@ class _HomePageBody extends StatelessWidget {
                     onSwitchValue:
                         (MyObjectDto objectDto, SwitchDto switchDto) {
                       vm.bloc.add(
-                        SetSwitchesValueEvent(
+                        SetSwitchValueEvent(
                           objectDto: objectDto,
                           switchDto: switchDto,
                         ),
