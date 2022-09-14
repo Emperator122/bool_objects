@@ -19,7 +19,8 @@ mixin _$HomePageState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(BuiltList<MyObject> objects, String? errorMessage)
+    required TResult Function(
+            BuiltList<MyObjectDto> objects, String? errorMessage, bool loading)
         data,
     required TResult Function(String? errorMessage) errorOnly,
   }) =>
@@ -27,14 +28,18 @@ mixin _$HomePageState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(BuiltList<MyObject> objects, String? errorMessage)? data,
+    TResult Function(
+            BuiltList<MyObjectDto> objects, String? errorMessage, bool loading)?
+        data,
     TResult Function(String? errorMessage)? errorOnly,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(BuiltList<MyObject> objects, String? errorMessage)? data,
+    TResult Function(
+            BuiltList<MyObjectDto> objects, String? errorMessage, bool loading)?
+        data,
     TResult Function(String? errorMessage)? errorOnly,
     required TResult orElse(),
   }) =>
@@ -122,7 +127,8 @@ class _$HomePageLoading extends HomePageLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(BuiltList<MyObject> objects, String? errorMessage)
+    required TResult Function(
+            BuiltList<MyObjectDto> objects, String? errorMessage, bool loading)
         data,
     required TResult Function(String? errorMessage) errorOnly,
   }) {
@@ -133,7 +139,9 @@ class _$HomePageLoading extends HomePageLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(BuiltList<MyObject> objects, String? errorMessage)? data,
+    TResult Function(
+            BuiltList<MyObjectDto> objects, String? errorMessage, bool loading)?
+        data,
     TResult Function(String? errorMessage)? errorOnly,
   }) {
     return loading?.call();
@@ -143,7 +151,9 @@ class _$HomePageLoading extends HomePageLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(BuiltList<MyObject> objects, String? errorMessage)? data,
+    TResult Function(
+            BuiltList<MyObjectDto> objects, String? errorMessage, bool loading)?
+        data,
     TResult Function(String? errorMessage)? errorOnly,
     required TResult orElse(),
   }) {
@@ -198,7 +208,8 @@ abstract class _$$HomePageDataCopyWith<$Res> {
   factory _$$HomePageDataCopyWith(
           _$HomePageData value, $Res Function(_$HomePageData) then) =
       __$$HomePageDataCopyWithImpl<$Res>;
-  $Res call({BuiltList<MyObject> objects, String? errorMessage});
+  $Res call(
+      {BuiltList<MyObjectDto> objects, String? errorMessage, bool loading});
 }
 
 /// @nodoc
@@ -216,16 +227,21 @@ class __$$HomePageDataCopyWithImpl<$Res>
   $Res call({
     Object? objects = freezed,
     Object? errorMessage = freezed,
+    Object? loading = freezed,
   }) {
     return _then(_$HomePageData(
       objects: objects == freezed
           ? _value.objects
           : objects // ignore: cast_nullable_to_non_nullable
-              as BuiltList<MyObject>,
+              as BuiltList<MyObjectDto>,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      loading: loading == freezed
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -233,16 +249,20 @@ class __$$HomePageDataCopyWithImpl<$Res>
 /// @nodoc
 
 class _$HomePageData extends HomePageData {
-  const _$HomePageData({required this.objects, this.errorMessage}) : super._();
+  const _$HomePageData(
+      {required this.objects, this.errorMessage, required this.loading})
+      : super._();
 
   @override
-  final BuiltList<MyObject> objects;
+  final BuiltList<MyObjectDto> objects;
   @override
   final String? errorMessage;
+  @override
+  final bool loading;
 
   @override
   String toString() {
-    return 'HomePageState.data(objects: $objects, errorMessage: $errorMessage)';
+    return 'HomePageState.data(objects: $objects, errorMessage: $errorMessage, loading: $loading)';
   }
 
   @override
@@ -252,14 +272,16 @@ class _$HomePageData extends HomePageData {
             other is _$HomePageData &&
             const DeepCollectionEquality().equals(other.objects, objects) &&
             const DeepCollectionEquality()
-                .equals(other.errorMessage, errorMessage));
+                .equals(other.errorMessage, errorMessage) &&
+            const DeepCollectionEquality().equals(other.loading, loading));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(objects),
-      const DeepCollectionEquality().hash(errorMessage));
+      const DeepCollectionEquality().hash(errorMessage),
+      const DeepCollectionEquality().hash(loading));
 
   @JsonKey(ignore: true)
   @override
@@ -270,33 +292,38 @@ class _$HomePageData extends HomePageData {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(BuiltList<MyObject> objects, String? errorMessage)
+    required TResult Function(
+            BuiltList<MyObjectDto> objects, String? errorMessage, bool loading)
         data,
     required TResult Function(String? errorMessage) errorOnly,
   }) {
-    return data(objects, errorMessage);
+    return data(objects, errorMessage, this.loading);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(BuiltList<MyObject> objects, String? errorMessage)? data,
+    TResult Function(
+            BuiltList<MyObjectDto> objects, String? errorMessage, bool loading)?
+        data,
     TResult Function(String? errorMessage)? errorOnly,
   }) {
-    return data?.call(objects, errorMessage);
+    return data?.call(objects, errorMessage, this.loading);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(BuiltList<MyObject> objects, String? errorMessage)? data,
+    TResult Function(
+            BuiltList<MyObjectDto> objects, String? errorMessage, bool loading)?
+        data,
     TResult Function(String? errorMessage)? errorOnly,
     required TResult orElse(),
   }) {
     if (data != null) {
-      return data(objects, errorMessage);
+      return data(objects, errorMessage, this.loading);
     }
     return orElse();
   }
@@ -338,12 +365,14 @@ class _$HomePageData extends HomePageData {
 
 abstract class HomePageData extends HomePageState {
   const factory HomePageData(
-      {required final BuiltList<MyObject> objects,
-      final String? errorMessage}) = _$HomePageData;
+      {required final BuiltList<MyObjectDto> objects,
+      final String? errorMessage,
+      required final bool loading}) = _$HomePageData;
   const HomePageData._() : super._();
 
-  BuiltList<MyObject> get objects;
+  BuiltList<MyObjectDto> get objects;
   String? get errorMessage;
+  bool get loading;
   @JsonKey(ignore: true)
   _$$HomePageDataCopyWith<_$HomePageData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -416,7 +445,8 @@ class _$HomePageErrorOnly extends HomePageErrorOnly {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(BuiltList<MyObject> objects, String? errorMessage)
+    required TResult Function(
+            BuiltList<MyObjectDto> objects, String? errorMessage, bool loading)
         data,
     required TResult Function(String? errorMessage) errorOnly,
   }) {
@@ -427,7 +457,9 @@ class _$HomePageErrorOnly extends HomePageErrorOnly {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(BuiltList<MyObject> objects, String? errorMessage)? data,
+    TResult Function(
+            BuiltList<MyObjectDto> objects, String? errorMessage, bool loading)?
+        data,
     TResult Function(String? errorMessage)? errorOnly,
   }) {
     return errorOnly?.call(errorMessage);
@@ -437,7 +469,9 @@ class _$HomePageErrorOnly extends HomePageErrorOnly {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(BuiltList<MyObject> objects, String? errorMessage)? data,
+    TResult Function(
+            BuiltList<MyObjectDto> objects, String? errorMessage, bool loading)?
+        data,
     TResult Function(String? errorMessage)? errorOnly,
     required TResult orElse(),
   }) {

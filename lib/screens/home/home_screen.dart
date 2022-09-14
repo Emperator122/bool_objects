@@ -1,6 +1,7 @@
 import 'package:bool_objects/core/disposable_vm/disposable_vm.dart';
 import 'package:bool_objects/core/error_snack_bar.dart';
 import 'package:bool_objects/screens/home/bloc/bloc.dart';
+import 'package:bool_objects/screens/home/bloc/event.dart';
 import 'package:bool_objects/screens/home/bloc/state.dart';
 import 'package:bool_objects/screens/home/components/object_card.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,10 @@ class _MyHomePageState extends State<HomePage> with ErrorSnackBar {
             errorOnly: (state) => Center(
               child: Text(state.errorMessage ?? ''),
             ),
-            data: (state) => _HomePageBody(data: state),
+            data: (state) => _HomePageBody(
+              data: state,
+              vm: _vm,
+            ),
           );
         },
       ), // This trailing comma makes auto-formatting nicer for build methods.
@@ -76,22 +80,40 @@ class _MyHomePageState extends State<HomePage> with ErrorSnackBar {
 
 class _HomePageBody extends StatelessWidget {
   final HomePageData data;
+  final HomePageVm vm;
 
   const _HomePageBody({
     required this.data,
+    required this.vm,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      physics: const BouncingScrollPhysics(),
-      children: data.objects
-          .map(
-            (object) => ObjectCard(
-              object: object,
-            ),
-          )
-          .toList(),
+    return RefreshIndicator(
+      onRefresh: () async {
+        vm.bloc.add(LoadDataEvent());
+        do {
+          await Future.delayed(const Duration(microseconds: 200));
+        } while (vm.bloc.state
+            .maybeMap(orElse: () => false, data: (state) => state.loading));
+      },
+      child: ListView(
+        physics: const BouncingScrollPhysics(),
+        children: [
+          const SizedBox(height: 10),
+          ...data.objects
+              .map(
+                (object) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: ObjectCard(
+                    object: object,
+                  ),
+                ),
+              )
+              .toList(),
+          const SizedBox(height: 10),
+        ],
+      ),
     );
   }
 }
