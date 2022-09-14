@@ -11,6 +11,8 @@ import 'package:rxdart/rxdart.dart';
 abstract class ObjectsRepository {
   Future<BuiltList<MyObjectDto>> getObjects();
 
+  Future<void> editObject(MyObjectDto objectDto, SwitchDto switchDto);
+
   Stream<BuiltList<MyObjectDto>> get listenableObjectsDtoStream;
 
   void close();
@@ -38,6 +40,15 @@ class ObjectsRepositoryImpl extends ObjectsRepository {
   @override
   Future<BuiltList<MyObjectDto>> getObjects() async {
     return (await _usersApi.getObjects()).toMyObjectDtos();
+  }
+
+  @override
+  Future<void> editObject(MyObjectDto objectDto, SwitchDto switchDto) {
+    return _usersApi.editObject(
+      objectDto.id,
+      switchDto.type.toServerString(),
+      switchDto.value,
+    );
   }
 
   void _onListenableObjectsApiData(BuiltList<MyObject> objects) {

@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 
 abstract class ObjectsApi {
   Future<BuiltList<MyObject>> getObjects();
+  Future<void> editObject(int objectId, String switchId, bool switchValue);
 }
 
 class ObjectsApiImpl extends ObjectsApi with FakeDuration {
@@ -21,5 +22,12 @@ class ObjectsApiImpl extends ObjectsApi with FakeDuration {
         .toBuiltList();
 
     return objects ?? BuiltList();
+  }
+
+  @override
+  Future<void> editObject(int objectId, String switchId, bool switchValue) async {
+    await fakeDuration;
+    final firebaseRef = FirebaseDatabase.instance.ref("objects/$objectId");
+    await firebaseRef.update({switchId: switchValue});
   }
 }

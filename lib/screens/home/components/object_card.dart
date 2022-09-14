@@ -1,4 +1,5 @@
 import 'package:bool_objects/entities/my_object_dto.dart';
+import 'package:bool_objects/screens/home/bloc/state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' as cupertino;
 
@@ -6,10 +7,14 @@ const double cardPadding = 15.0;
 
 class ObjectCard extends StatelessWidget {
   final MyObjectDto object;
+  final void Function(MyObjectDto objectDto, SwitchDto switchDto) onSwitchValue;
+  final HomePageState state;
 
   const ObjectCard({
     Key? key,
     required this.object,
+    required this.onSwitchValue,
+    required this.state,
   }) : super(key: key);
 
   @override
@@ -32,12 +37,18 @@ class ObjectCard extends StatelessWidget {
                 Row(
                   children: [
                     const SizedBox(width: 15),
-                    const Text('Switch #1'),
+                    const Text('Switch'),
                     Transform.scale(
                       scale: 0.6,
                       child: cupertino.CupertinoSwitch(
                         value: object.switch1.value,
-                        onChanged: (value) => print('lala'),
+                        onChanged: (value) {
+                          if(state.loading) {
+                            return;
+                          }
+                          final switchDto = object.switch1.copyWith(value: value);
+                          onSwitchValue(object.copyWith(switch1: switchDto), switchDto);
+                        },
                       ),
                     ),
                   ],
@@ -47,14 +58,26 @@ class ObjectCard extends StatelessWidget {
                     Radio<bool>(
                       value: true,
                       groupValue: object.switch2.value,
-                      onChanged: (bool? value) {},
+                      onChanged: (bool? value) {
+                        if(state.loading) {
+                          return;
+                        }
+                        final switchDto = object.switch2.copyWith(value: (value ?? true));
+                        onSwitchValue(object.copyWith(switch2: switchDto), switchDto);
+                      },
                     ),
                     const Text('Radio1'),
                     const SizedBox(width: 15),
                     Radio<bool>(
                       value: false,
                       groupValue: object.switch2.value,
-                      onChanged: (bool? value) {},
+                      onChanged: (bool? value) {
+                        if(state.loading) {
+                          return;
+                        }
+                        final switchDto = object.switch2.copyWith(value: (value ?? true));
+                        onSwitchValue(object.copyWith(switch2: switchDto), switchDto);
+                      },
                     ),
                     const Text('Radio2'),
                   ],
@@ -63,7 +86,13 @@ class ObjectCard extends StatelessWidget {
                   children: [
                     Checkbox(
                       value: object.switch3.value,
-                      onChanged: (bool? value) {},
+                      onChanged: (bool? value) {
+                        if(state.loading) {
+                          return;
+                        }
+                        final switchDto = object.switch3.copyWith(value: (value ?? !object.switch3.value));
+                        onSwitchValue(object.copyWith(switch3: switchDto), switchDto);
+                      },
                     ),
                     const Text('Checkbox'),
                   ],

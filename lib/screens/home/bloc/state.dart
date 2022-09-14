@@ -40,4 +40,10 @@ class HomePageState with _$HomePageState {
         data: (state) => state.errorMessage,
         errorOnly: (state) => state.errorMessage,
       );
+
+  bool get loading => maybeMap(
+        orElse: () => false,
+        loading: (state) => true,
+        data: (state) => state.loading,
+      );
 }

@@ -1,5 +1,6 @@
 import 'package:bool_objects/core/disposable_vm/disposable_vm.dart';
 import 'package:bool_objects/core/error_snack_bar.dart';
+import 'package:bool_objects/entities/my_object_dto.dart';
 import 'package:bool_objects/screens/home/bloc/bloc.dart';
 import 'package:bool_objects/screens/home/bloc/event.dart';
 import 'package:bool_objects/screens/home/bloc/state.dart';
@@ -107,6 +108,16 @@ class _HomePageBody extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: ObjectCard(
                     object: object,
+                    state: data,
+                    onSwitchValue:
+                        (MyObjectDto objectDto, SwitchDto switchDto) {
+                      vm.bloc.add(
+                        SetSwitchesValueEvent(
+                          objectDto: objectDto,
+                          switchDto: switchDto,
+                        ),
+                      );
+                    },
                   ),
                 ),
               )

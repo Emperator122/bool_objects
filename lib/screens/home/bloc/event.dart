@@ -11,6 +11,12 @@ class SetDataEvent extends HomePageEvent {
   SetDataEvent({required this.objects});
 }
 
-class SetSwitchValue {
+class SetSwitchesValueEvent extends HomePageEvent {
+  final MyObjectDto objectDto;
+  final SwitchDto switchDto;
 
+  SetSwitchesValueEvent({
+    required this.objectDto,
+    required this.switchDto,
+  });
 }

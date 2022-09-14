@@ -17,6 +17,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
 
     on<LoadDataEvent>(_onLoadData);
     on<SetDataEvent>(_onSetData);
+    on<SetSwitchesValueEvent>(_onSetSwitchValue);
 
     add(LoadDataEvent());
 
@@ -50,6 +51,22 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     ));
   }
 
+  Future<void> _onSetSwitchValue(
+    SetSwitchesValueEvent event,
+    Emitter<HomePageState> emit,
+  ) async {
+    emit(state.provideLoading());
+    final newState = state.mapOrNull(
+      data: (state) => state.copyWith(
+        objects: state.objects.replaceObject(event.objectDto),
+      ),
+    );
+    if(newState != null) {
+      emit(newState);
+    }
+    await objectsRepository.editObject(event.objectDto, event.switchDto);
+  }
+
   void _onUpdateData(BuiltList<MyObjectDto> myObjects) {
     add(SetDataEvent(objects: myObjects));
   }
@@ -58,5 +75,15 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   Future<void> close() async {
     objectsRepository.close();
     super.close();
+  }
+}
+
+extension on BuiltList<MyObjectDto> {
+  BuiltList<MyObjectDto> replaceObject(MyObjectDto objectDto) {
+    final index = indexWhere((object) => object.id == objectDto.id);
+    if (index != -1) {
+      return rebuild((list) => list[index] = objectDto);
+    }
+    return this;
   }
 }
