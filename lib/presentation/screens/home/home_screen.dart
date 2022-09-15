@@ -1,13 +1,13 @@
 import 'package:bool_objects/core/disposable_vm/disposable_vm.dart';
 import 'package:bool_objects/core/error_snack_bar.dart';
 import 'package:bool_objects/entities/my_object_dto.dart';
-import 'package:bool_objects/screens/home/bloc/bloc.dart';
-import 'package:bool_objects/screens/home/bloc/event.dart';
-import 'package:bool_objects/screens/home/bloc/state.dart';
-import 'package:bool_objects/screens/home/components/object_card.dart';
+import 'package:bool_objects/presentation/screens/home/bloc/bloc.dart';
+import 'package:bool_objects/presentation/screens/home/bloc/event.dart';
+import 'package:bool_objects/presentation/screens/home/bloc/state.dart';
+import 'package:bool_objects/presentation/screens/home/components/object_card.dart';
+import 'package:bool_objects/presentation/ui/connection_state_widget/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bool_objects/ui/connection_state_widget/widget.dart';
 
 const double _cardBottomMargin = 24.0;
 

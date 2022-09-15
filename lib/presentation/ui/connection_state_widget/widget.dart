@@ -1,5 +1,5 @@
-import 'package:bool_objects/ui/connection_state_widget/bloc/bloc.dart';
-import 'package:bool_objects/ui/connection_state_widget/bloc/state.dart';
+import 'package:bool_objects/presentation/ui/connection_state_widget/bloc/bloc.dart';
+import 'package:bool_objects/presentation/ui/connection_state_widget/bloc/state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

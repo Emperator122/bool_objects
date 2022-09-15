@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:bool_objects/entities/my_object_dto.dart';
+import 'package:bool_objects/presentation/screens/home/bloc/event.dart';
+import 'package:bool_objects/presentation/screens/home/bloc/state.dart';
 import 'package:bool_objects/repositories/objects_repository.dart';
-import 'package:bool_objects/screens/home/bloc/event.dart';
-import 'package:bool_objects/screens/home/bloc/state.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';

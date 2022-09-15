@@ -1,5 +1,5 @@
-import 'package:bool_objects/screens/home/home_screen.dart';
-import 'package:bool_objects/ui/connection_state_widget/bloc/bloc.dart';
+import 'package:bool_objects/presentation/screens/home/home_screen.dart';
+import 'package:bool_objects/presentation/ui/connection_state_widget/bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';

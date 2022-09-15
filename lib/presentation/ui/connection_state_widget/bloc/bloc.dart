@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'package:bool_objects/presentation/ui/connection_state_widget/bloc/event.dart';
+import 'package:bool_objects/presentation/ui/connection_state_widget/bloc/state.dart';
 import 'package:bool_objects/repositories/connection_state_repository.dart';
-import 'package:bool_objects/ui/connection_state_widget/bloc/event.dart';
-import 'package:bool_objects/ui/connection_state_widget/bloc/state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ConnectionStateBloc

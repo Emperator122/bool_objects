@@ -5,8 +5,14 @@ import 'package:built_collection/built_collection.dart';
 extension MyObjectsMapExt on BuiltMap<String, MyObject> {
   BuiltList<MyObjectDto> toMyObjectDtos() {
     final objectDtosList = entries.map((entry) => entry.value.toMyObjectDto(entry.key)).toList();
-    objectDtosList.sort((el1, el2) => el1.sortOrder.compareTo(el2.sortOrder));
+    objectDtosList.sortByOrder();
     return objectDtosList.toBuiltList();
+  }
+}
+
+extension MyObjectListExt on List<MyObjectDto> {
+  void sortByOrder() {
+    sort((el1, el2) => el1.sortOrder.compareTo(el2.sortOrder));
   }
 }
 

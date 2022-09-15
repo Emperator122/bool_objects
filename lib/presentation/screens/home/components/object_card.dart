@@ -1,5 +1,5 @@
 import 'package:bool_objects/entities/my_object_dto.dart';
-import 'package:bool_objects/screens/home/bloc/state.dart';
+import 'package:bool_objects/presentation/screens/home/bloc/state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' as cupertino;
 
