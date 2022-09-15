@@ -2,24 +2,17 @@ import 'package:bool_objects/entities/my_object_dto.dart';
 import 'package:bool_objects/network/models/my_object.dart';
 import 'package:built_collection/built_collection.dart';
 
-extension MyObjectsExt on BuiltList<MyObject> {
-  BuiltList<MyObject> sortedByOrder() => rebuild((list) =>
-      list.sort((el1, el2) => el1.sortOrder.compareTo(el2.sortOrder)));
-
+extension MyObjectsMapExt on BuiltMap<String, MyObject> {
   BuiltList<MyObjectDto> toMyObjectDtos() {
-    final result = <MyObjectDto>[];
-    for(var i = 0; i<length; i++) {
-      result.add(this[i].toMyObjectDto(i));
-    }
-    result.sort((el1, el2) => el1.sortOrder.compareTo(el2.sortOrder));
-    return result.toBuiltList();
+    final objectDtosList = entries.map((entry) => entry.value.toMyObjectDto(entry.key)).toList();
+    objectDtosList.sort((el1, el2) => el1.sortOrder.compareTo(el2.sortOrder));
+    return objectDtosList.toBuiltList();
   }
-
 }
 
 extension MyObjectExt on MyObject {
-  MyObjectDto toMyObjectDto(int dbPosition) => MyObjectDto(
-      dbPosition: dbPosition,
+  MyObjectDto toMyObjectDto(String dbKey) => MyObjectDto(
+      dbKey: dbKey,
       id: id,
       name: name,
       sortOrder: sortOrder,

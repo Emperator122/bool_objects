@@ -6,7 +6,7 @@ part 'my_object_dto.freezed.dart';
 @freezed
 class MyObjectDto with _$MyObjectDto {
   const factory MyObjectDto({
-    required int dbPosition,
+    required String dbKey,
     required int id,
     required String name,
     required int sortOrder,

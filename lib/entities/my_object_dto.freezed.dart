@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MyObjectDto {
-  int get dbPosition => throw _privateConstructorUsedError;
+  String get dbKey => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get sortOrder => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $MyObjectDtoCopyWith<$Res> {
           MyObjectDto value, $Res Function(MyObjectDto) then) =
       _$MyObjectDtoCopyWithImpl<$Res>;
   $Res call(
-      {int dbPosition,
+      {String dbKey,
       int id,
       String name,
       int sortOrder,
@@ -58,7 +58,7 @@ class _$MyObjectDtoCopyWithImpl<$Res> implements $MyObjectDtoCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? dbPosition = freezed,
+    Object? dbKey = freezed,
     Object? id = freezed,
     Object? name = freezed,
     Object? sortOrder = freezed,
@@ -67,10 +67,10 @@ class _$MyObjectDtoCopyWithImpl<$Res> implements $MyObjectDtoCopyWith<$Res> {
     Object? switch3 = freezed,
   }) {
     return _then(_value.copyWith(
-      dbPosition: dbPosition == freezed
-          ? _value.dbPosition
-          : dbPosition // ignore: cast_nullable_to_non_nullable
-              as int,
+      dbKey: dbKey == freezed
+          ? _value.dbKey
+          : dbKey // ignore: cast_nullable_to_non_nullable
+              as String,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -128,7 +128,7 @@ abstract class _$$_MyObjectDtoCopyWith<$Res>
       __$$_MyObjectDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int dbPosition,
+      {String dbKey,
       int id,
       String name,
       int sortOrder,
@@ -156,7 +156,7 @@ class __$$_MyObjectDtoCopyWithImpl<$Res> extends _$MyObjectDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? dbPosition = freezed,
+    Object? dbKey = freezed,
     Object? id = freezed,
     Object? name = freezed,
     Object? sortOrder = freezed,
@@ -165,10 +165,10 @@ class __$$_MyObjectDtoCopyWithImpl<$Res> extends _$MyObjectDtoCopyWithImpl<$Res>
     Object? switch3 = freezed,
   }) {
     return _then(_$_MyObjectDto(
-      dbPosition: dbPosition == freezed
-          ? _value.dbPosition
-          : dbPosition // ignore: cast_nullable_to_non_nullable
-              as int,
+      dbKey: dbKey == freezed
+          ? _value.dbKey
+          : dbKey // ignore: cast_nullable_to_non_nullable
+              as String,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -201,7 +201,7 @@ class __$$_MyObjectDtoCopyWithImpl<$Res> extends _$MyObjectDtoCopyWithImpl<$Res>
 
 class _$_MyObjectDto implements _MyObjectDto {
   const _$_MyObjectDto(
-      {required this.dbPosition,
+      {required this.dbKey,
       required this.id,
       required this.name,
       required this.sortOrder,
@@ -210,7 +210,7 @@ class _$_MyObjectDto implements _MyObjectDto {
       required this.switch3});
 
   @override
-  final int dbPosition;
+  final String dbKey;
   @override
   final int id;
   @override
@@ -226,7 +226,7 @@ class _$_MyObjectDto implements _MyObjectDto {
 
   @override
   String toString() {
-    return 'MyObjectDto(dbPosition: $dbPosition, id: $id, name: $name, sortOrder: $sortOrder, switch1: $switch1, switch2: $switch2, switch3: $switch3)';
+    return 'MyObjectDto(dbKey: $dbKey, id: $id, name: $name, sortOrder: $sortOrder, switch1: $switch1, switch2: $switch2, switch3: $switch3)';
   }
 
   @override
@@ -234,8 +234,7 @@ class _$_MyObjectDto implements _MyObjectDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MyObjectDto &&
-            const DeepCollectionEquality()
-                .equals(other.dbPosition, dbPosition) &&
+            const DeepCollectionEquality().equals(other.dbKey, dbKey) &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.sortOrder, sortOrder) &&
@@ -247,7 +246,7 @@ class _$_MyObjectDto implements _MyObjectDto {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(dbPosition),
+      const DeepCollectionEquality().hash(dbKey),
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(sortOrder),
@@ -263,7 +262,7 @@ class _$_MyObjectDto implements _MyObjectDto {
 
 abstract class _MyObjectDto implements MyObjectDto {
   const factory _MyObjectDto(
-      {required final int dbPosition,
+      {required final String dbKey,
       required final int id,
       required final String name,
       required final int sortOrder,
@@ -272,7 +271,7 @@ abstract class _MyObjectDto implements MyObjectDto {
       required final SwitchDto switch3}) = _$_MyObjectDto;
 
   @override
-  int get dbPosition;
+  String get dbKey;
   @override
   int get id;
   @override

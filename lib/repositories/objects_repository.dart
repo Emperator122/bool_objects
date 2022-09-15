@@ -45,13 +45,13 @@ class ObjectsRepositoryImpl extends ObjectsRepository {
   @override
   Future<void> editObject(MyObjectDto objectDto, SwitchDto switchDto) {
     return _objectsApi.editObject(
-      objectDto.dbPosition,
+      objectDto.dbKey,
       switchDto.type.toServerString(),
       switchDto.value,
     );
   }
 
-  void _onListenableObjectsApiData(BuiltList<MyObject> objects) {
+  void _onListenableObjectsApiData(BuiltMap<String, MyObject> objects) {
     _listenableObjectsDto.add(objects.toMyObjectDtos());
   }
 
