@@ -1,5 +1,4 @@
 import 'package:bool_objects/entities/my_object_dto.dart';
-import 'package:bool_objects/network/models/my_object.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
