@@ -1,16 +1,14 @@
-# bool_objects
+# Генераторы
+Генераторы запускаются следующей командой:
 
-A new Flutter project.
+``
+flutter pub run build_runner build --delete-conflicting-outputs
+``
 
-## Getting Started
+# Техническое задание
+Файл с ТЗ находится в репозитаории
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Видео-демонстрация
+Небольшая демонстрация доступна по [ссылке](https://disk.yandex.ru/i/bavzP3escmZU5A). На видео
+можно увидеть структуру базы данных (Firebase Realtime Database), а также процесс взаимодействия
+двух приложений на двух разных устройствах.
