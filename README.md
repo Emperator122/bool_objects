@@ -6,7 +6,7 @@ flutter pub run build_runner build --delete-conflicting-outputs
 ``
 
 # Техническое задание
-Файл с ТЗ находится в репозитаории
+Файл с ТЗ находится в репозитории
 
 # Видео-демонстрация
 Небольшая демонстрация доступна по [ссылке](https://disk.yandex.ru/i/bavzP3escmZU5A). На видео
