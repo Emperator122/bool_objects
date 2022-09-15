@@ -16,8 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MyObjectDto {
+  int get dbPosition => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  int get sortOrder => throw _privateConstructorUsedError;
   SwitchDto get switch1 => throw _privateConstructorUsedError;
   SwitchDto get switch2 => throw _privateConstructorUsedError;
   SwitchDto get switch3 => throw _privateConstructorUsedError;
@@ -33,8 +35,10 @@ abstract class $MyObjectDtoCopyWith<$Res> {
           MyObjectDto value, $Res Function(MyObjectDto) then) =
       _$MyObjectDtoCopyWithImpl<$Res>;
   $Res call(
-      {int id,
+      {int dbPosition,
+      int id,
       String name,
+      int sortOrder,
       SwitchDto switch1,
       SwitchDto switch2,
       SwitchDto switch3});
@@ -54,13 +58,19 @@ class _$MyObjectDtoCopyWithImpl<$Res> implements $MyObjectDtoCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? dbPosition = freezed,
     Object? id = freezed,
     Object? name = freezed,
+    Object? sortOrder = freezed,
     Object? switch1 = freezed,
     Object? switch2 = freezed,
     Object? switch3 = freezed,
   }) {
     return _then(_value.copyWith(
+      dbPosition: dbPosition == freezed
+          ? _value.dbPosition
+          : dbPosition // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -69,6 +79,10 @@ class _$MyObjectDtoCopyWithImpl<$Res> implements $MyObjectDtoCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      sortOrder: sortOrder == freezed
+          ? _value.sortOrder
+          : sortOrder // ignore: cast_nullable_to_non_nullable
+              as int,
       switch1: switch1 == freezed
           ? _value.switch1
           : switch1 // ignore: cast_nullable_to_non_nullable
@@ -114,8 +128,10 @@ abstract class _$$_MyObjectDtoCopyWith<$Res>
       __$$_MyObjectDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id,
+      {int dbPosition,
+      int id,
       String name,
+      int sortOrder,
       SwitchDto switch1,
       SwitchDto switch2,
       SwitchDto switch3});
@@ -140,13 +156,19 @@ class __$$_MyObjectDtoCopyWithImpl<$Res> extends _$MyObjectDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? dbPosition = freezed,
     Object? id = freezed,
     Object? name = freezed,
+    Object? sortOrder = freezed,
     Object? switch1 = freezed,
     Object? switch2 = freezed,
     Object? switch3 = freezed,
   }) {
     return _then(_$_MyObjectDto(
+      dbPosition: dbPosition == freezed
+          ? _value.dbPosition
+          : dbPosition // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -155,6 +177,10 @@ class __$$_MyObjectDtoCopyWithImpl<$Res> extends _$MyObjectDtoCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      sortOrder: sortOrder == freezed
+          ? _value.sortOrder
+          : sortOrder // ignore: cast_nullable_to_non_nullable
+              as int,
       switch1: switch1 == freezed
           ? _value.switch1
           : switch1 // ignore: cast_nullable_to_non_nullable
@@ -175,16 +201,22 @@ class __$$_MyObjectDtoCopyWithImpl<$Res> extends _$MyObjectDtoCopyWithImpl<$Res>
 
 class _$_MyObjectDto implements _MyObjectDto {
   const _$_MyObjectDto(
-      {required this.id,
+      {required this.dbPosition,
+      required this.id,
       required this.name,
+      required this.sortOrder,
       required this.switch1,
       required this.switch2,
       required this.switch3});
 
   @override
+  final int dbPosition;
+  @override
   final int id;
   @override
   final String name;
+  @override
+  final int sortOrder;
   @override
   final SwitchDto switch1;
   @override
@@ -194,7 +226,7 @@ class _$_MyObjectDto implements _MyObjectDto {
 
   @override
   String toString() {
-    return 'MyObjectDto(id: $id, name: $name, switch1: $switch1, switch2: $switch2, switch3: $switch3)';
+    return 'MyObjectDto(dbPosition: $dbPosition, id: $id, name: $name, sortOrder: $sortOrder, switch1: $switch1, switch2: $switch2, switch3: $switch3)';
   }
 
   @override
@@ -202,8 +234,11 @@ class _$_MyObjectDto implements _MyObjectDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MyObjectDto &&
+            const DeepCollectionEquality()
+                .equals(other.dbPosition, dbPosition) &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.sortOrder, sortOrder) &&
             const DeepCollectionEquality().equals(other.switch1, switch1) &&
             const DeepCollectionEquality().equals(other.switch2, switch2) &&
             const DeepCollectionEquality().equals(other.switch3, switch3));
@@ -212,8 +247,10 @@ class _$_MyObjectDto implements _MyObjectDto {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(dbPosition),
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(sortOrder),
       const DeepCollectionEquality().hash(switch1),
       const DeepCollectionEquality().hash(switch2),
       const DeepCollectionEquality().hash(switch3));
@@ -226,16 +263,22 @@ class _$_MyObjectDto implements _MyObjectDto {
 
 abstract class _MyObjectDto implements MyObjectDto {
   const factory _MyObjectDto(
-      {required final int id,
+      {required final int dbPosition,
+      required final int id,
       required final String name,
+      required final int sortOrder,
       required final SwitchDto switch1,
       required final SwitchDto switch2,
       required final SwitchDto switch3}) = _$_MyObjectDto;
 
   @override
+  int get dbPosition;
+  @override
   int get id;
   @override
   String get name;
+  @override
+  int get sortOrder;
   @override
   SwitchDto get switch1;
   @override

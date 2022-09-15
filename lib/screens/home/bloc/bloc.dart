@@ -7,7 +7,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-const _serverGetDebounceDuration = Duration(milliseconds: 5000);
+const _serverGetDebounceDuration = Duration(milliseconds: 10000);
 const _serverSendDebounceDuration = Duration(milliseconds: 2000);
 
 EventTransformer<SendSwitchValueToDBEvent> debounce(Duration duration) {

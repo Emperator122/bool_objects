@@ -7,6 +7,7 @@ import 'package:bool_objects/screens/home/bloc/state.dart';
 import 'package:bool_objects/screens/home/components/object_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bool_objects/ui/connection_state_widget/widget.dart';
 
 const double _cardBottomMargin = 24.0;
 
@@ -70,13 +71,15 @@ class _MyHomePageState extends State<HomePage> with ErrorSnackBar {
             errorOnly: (state) => Center(
               child: Text(state.errorMessage ?? ''),
             ),
-            data: (state) => _HomePageBody(
-              data: state,
-              vm: _vm,
+            data: (state) => ConnectionStateWidget(
+              child: _HomePageBody(
+                data: state,
+                vm: _vm,
+              ),
             ),
           );
         },
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

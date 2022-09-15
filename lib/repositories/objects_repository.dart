@@ -19,10 +19,10 @@ abstract class ObjectsRepository {
 }
 
 class ObjectsRepositoryImpl extends ObjectsRepository {
-  final ObjectsApi _usersApi;
+  final ObjectsApi _objectsApi;
+
   final ListenableObjectsApi _listenableObjectsApi;
   late final StreamSubscription _listenableObjectsApiSubscription;
-
   final PublishSubject<BuiltList<MyObjectDto>> _listenableObjectsDto;
 
   @override
@@ -30,7 +30,7 @@ class ObjectsRepositoryImpl extends ObjectsRepository {
       _listenableObjectsDto.stream;
 
   ObjectsRepositoryImpl()
-      : _usersApi = ObjectsApiImpl(),
+      : _objectsApi = ObjectsApiImpl(),
         _listenableObjectsApi = ListenableObjectsApiImpl(),
         _listenableObjectsDto = PublishSubject<BuiltList<MyObjectDto>>() {
     _listenableObjectsApiSubscription =
@@ -39,13 +39,13 @@ class ObjectsRepositoryImpl extends ObjectsRepository {
 
   @override
   Future<BuiltList<MyObjectDto>> getObjects() async {
-    return (await _usersApi.getObjects()).toMyObjectDtos();
+    return (await _objectsApi.getObjects()).toMyObjectDtos();
   }
 
   @override
   Future<void> editObject(MyObjectDto objectDto, SwitchDto switchDto) {
-    return _usersApi.editObject(
-      objectDto.id,
+    return _objectsApi.editObject(
+      objectDto.dbPosition,
       switchDto.type.toServerString(),
       switchDto.value,
     );

@@ -1,10 +1,11 @@
 import 'package:bool_objects/screens/home/home_screen.dart';
+import 'package:bool_objects/ui/connection_state_widget/bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bool_objects/firebase_options.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
@@ -13,7 +14,14 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseDatabase.instance.setPersistenceEnabled(true);
-  runApp(const MyApp());
+  runApp(
+    MultiBlocProvider( // global providers
+      providers: [
+        BlocProvider(create: (context) => ConnectionStateBloc()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -45,27 +53,29 @@ class MyApp extends StatelessWidget {
         ),
         radioTheme: RadioThemeData(
           fillColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return const Color(0xFF31AC6A).withOpacity(.32);
-            }
-            if (!states.contains(MaterialState.selected)) {
-              return Colors.black.withOpacity(.75);
-            }
-            return const Color(0xFF31AC6A);
-          }),
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return const Color(0xFF31AC6A).withOpacity(.32);
+              }
+              if (!states.contains(MaterialState.selected)) {
+                return Colors.black.withOpacity(.75);
+              }
+              return const Color(0xFF31AC6A);
+            },
+          ),
         ),
         checkboxTheme: CheckboxThemeData(
           fillColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return const Color(0xFF31AC6A).withOpacity(.32);
-            }
-            if (!states.contains(MaterialState.selected)) {
-              return Colors.black.withOpacity(.75);
-            }
-            return const Color(0xFF31AC6A);
-          }),
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return const Color(0xFF31AC6A).withOpacity(.32);
+              }
+              if (!states.contains(MaterialState.selected)) {
+                return Colors.black.withOpacity(.75);
+              }
+              return const Color(0xFF31AC6A);
+            },
+          ),
         ),
         switchTheme: SwitchThemeData(
           trackColor: MaterialStateProperty.resolveWith<Color>(

@@ -6,14 +6,23 @@ extension MyObjectsExt on BuiltList<MyObject> {
   BuiltList<MyObject> sortedByOrder() => rebuild((list) =>
       list.sort((el1, el2) => el1.sortOrder.compareTo(el2.sortOrder)));
 
-  BuiltList<MyObjectDto> toMyObjectDtos() =>
-      sortedByOrder().map((object) => object.toMyObjectDto()).toBuiltList();
+  BuiltList<MyObjectDto> toMyObjectDtos() {
+    final result = <MyObjectDto>[];
+    for(var i = 0; i<length; i++) {
+      result.add(this[i].toMyObjectDto(i));
+    }
+    result.sort((el1, el2) => el1.sortOrder.compareTo(el2.sortOrder));
+    return result.toBuiltList();
+  }
+
 }
 
 extension MyObjectExt on MyObject {
-  MyObjectDto toMyObjectDto() => MyObjectDto(
+  MyObjectDto toMyObjectDto(int dbPosition) => MyObjectDto(
+      dbPosition: dbPosition,
       id: id,
       name: name,
+      sortOrder: sortOrder,
       switch1: SwitchDto(type: SwitchType.switch1, value: switch1),
       switch2: SwitchDto(type: SwitchType.switch2, value: switch2),
       switch3: SwitchDto(type: SwitchType.switch3, value: switch3),
